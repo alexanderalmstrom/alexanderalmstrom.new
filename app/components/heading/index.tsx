@@ -4,7 +4,12 @@ const heading = cva([], {
   variants: {
     size: {
       large: "text-fluid-1",
+      medium: "text-fluid-2",
+      small: "text-fluid-3",
     },
+  },
+  defaultVariants: {
+    size: "medium",
   },
 });
 
@@ -14,7 +19,7 @@ export interface HeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof heading> {
   className?: string;
-  as: HeadingType;
+  as?: HeadingType;
   children: React.ReactNode;
 }
 
@@ -25,7 +30,7 @@ export default function Heading({
   as,
   ...props
 }: HeadingProps) {
-  const Component = as;
+  const Component = as ?? "h2";
 
   return (
     <Component className={cx(className, heading({ size }))} {...props}>

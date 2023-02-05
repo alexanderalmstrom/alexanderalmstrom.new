@@ -2,7 +2,7 @@ import { cva, cx, type VariantProps } from "class-variance-authority";
 import HeroContent, { heroContent } from "./HeroContent";
 import HeroImage from "./HeroImage";
 
-export const hero = cva(["grid overflow-hidden"], {
+export const hero = cva(["grid relative overflow-hidden"], {
   variants: {
     variant: {
       full: "h-screen",
