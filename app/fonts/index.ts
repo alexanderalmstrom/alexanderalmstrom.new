@@ -20,6 +20,18 @@ export const suisseIntl = localFont({
     },
   ],
   variable: "--font-suisse-intl",
+  fallback: [
+    "system-ui",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica",
+    "Arial",
+    "sans-serif",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+  ],
+  adjustFontFallback: false,
 });
 
 export const suisseWorks = localFont({
@@ -27,13 +39,17 @@ export const suisseWorks = localFont({
     {
       path: "./SuisseWorks-BookItalic-WebTrial.ttf",
       weight: "400",
+      style: "italic",
     },
     {
       path: "./SuisseWorks-BoldItalic-WebTrial.ttf",
       weight: "700",
+      style: "italic",
     },
   ],
   variable: "--font-suisse-works",
+  fallback: ["Times New Roman", "Times", "serif"],
+  adjustFontFallback: false,
 });
 
 export const suisseMono = localFont({
@@ -44,4 +60,16 @@ export const suisseMono = localFont({
     },
   ],
   variable: "--font-suisse-mono",
+  fallback: [
+    "ui-monospace",
+    "Cascadia Mono",
+    "Segoe UI Mono",
+    "Ubuntu Mono",
+    "Roboto Mono",
+    "Menlo",
+    "Monaco",
+    "Consolas",
+    "monospace",
+  ],
+  adjustFontFallback: false,
 });

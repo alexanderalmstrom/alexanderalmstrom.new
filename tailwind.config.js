@@ -12,15 +12,22 @@ module.exports = {
   ],
   theme: {
     extend: {
+      aspectRatio: {
+        "9/16": "9/16",
+        "2/3": "2 / 3",
+        "5/7": "5 / 7",
+        "4/3": "4 / 3",
+        "16/9": "16 / 9",
+      },
       fontFamily: {
         sans: ["var(--font-suisse-intl)", ...fontFamily.sans],
         serif: ["var(--font-suisse-works)", ...fontFamily.serif],
         mono: ["var(--font-suisse-mono)", ...fontFamily.mono],
       },
       fontSize: {
-        "fluid-1": ["clamp(4rem, 8vw + 2rem, 8rem)", "1"],
-        "fluid-2": ["clamp(3rem, 6vw + 1.5rem, 6rem)", "1"],
-        "fluid-3": ["clamp(2rem, 4vw + 1rem, 4rem)", "1"],
+        "fluid-1": ["clamp(3rem, 6vw + 3rem, 9rem)", "1"],
+        "fluid-2": ["clamp(2rem, 4vw + 2rem, 6rem)", "1"],
+        "fluid-3": ["clamp(1rem, 2vw + 1rem, 3rem)", "1"],
       },
     },
   },

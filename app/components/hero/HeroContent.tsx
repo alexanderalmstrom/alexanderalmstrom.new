@@ -2,17 +2,17 @@ import { cva, cx, type VariantProps } from "class-variance-authority";
 
 export type HeroContentVariantProps = VariantProps<typeof heroContent>;
 
-export const heroContent = cva([], {
-  variants: {
-    align: {
-      center: "place-self-center text-center",
-      bottomLeft: "self-end",
+export const heroContent = cva(
+  ["col-span-full row-span-full max-w-6xl p-4 lg:p-8 z-10"],
+  {
+    variants: {
+      align: {
+        center: "place-self-center text-center",
+        bottomLeft: "self-end",
+      },
     },
-  },
-  defaultVariants: {
-    align: "bottomLeft",
-  },
-});
+  }
+);
 
 export interface HeroContentProps extends HeroContentVariantProps {
   className?: string;
@@ -20,8 +20,8 @@ export interface HeroContentProps extends HeroContentVariantProps {
 }
 
 export default function HeroContent({
-  children,
   className,
+  children,
   align,
 }: HeroContentProps) {
   return (

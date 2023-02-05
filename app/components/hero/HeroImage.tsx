@@ -1,42 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { cx } from "class-variance-authority";
+import { useIntersectionObserver } from "@/app/hooks/useIntersectionObserver";
+import { cva, cx, type VariantProps } from "class-variance-authority";
 import Image from "next/image";
+import { useRef } from "react";
 
-export interface HeroImageProps {
+export type HeroImageVariantProps = VariantProps<typeof heroImage>;
+
+export const heroImage = cva(["col-span-full row-span-full"], {
+  variants: {},
+});
+
+export interface HeroImageProps extends HeroImageVariantProps {
   className?: string;
   src: string;
   alt: string;
 }
 
 export default function HeroImage({ className, src, alt }: HeroImageProps) {
-  const observer = new IntersectionObserver(handleObserve);
-  const imageRef = useRef<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  function handleObserve(entries: IntersectionObserverEntry[]) {
-    for (const entry of entries) {
-      entry.isIntersecting && setIsVisible(true);
-      observer.unobserve(entry.target);
-    }
-  }
-
-  useEffect(() => {
-    if (!imageRef.current) {
-      return;
-    }
-
-    observer.observe(imageRef.current);
-  }, []);
+  const ref = useRef<HTMLElement | null>(null);
+  const isIntersecting = useIntersectionObserver(ref, {
+    threshold: 0,
+    rootMargin: "0px 0px",
+  });
 
   return (
-    <figure ref={imageRef} className={cx(className, "relative")}>
+    <figure ref={ref} className={cx(className, heroImage())}>
       <Image
-        className={cx("object-cover")}
+        className={cx(
+          "relative object-cover transition-opacity duration-300",
+          `${isIntersecting ? "opacity-1" : "opacity-0"}`
+        )}
         src={src}
         alt={alt}
-        loading={isVisible ? "eager" : "lazy"}
         fill
       />
     </figure>
