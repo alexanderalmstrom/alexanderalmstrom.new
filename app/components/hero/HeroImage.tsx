@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { cx } from "class-variance-authority";
 import Image from "next/image";
 
@@ -8,13 +11,32 @@ export interface HeroImageProps {
 }
 
 export default function HeroImage({ className, src, alt }: HeroImageProps) {
+  const observer = new IntersectionObserver(handleObserve);
+  const imageRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleObserve(entries: IntersectionObserverEntry[]) {
+    for (const entry of entries) {
+      entry.isIntersecting && setIsVisible(true);
+      observer.unobserve(entry.target);
+    }
+  }
+
+  useEffect(() => {
+    if (!imageRef.current) {
+      return;
+    }
+
+    observer.observe(imageRef.current);
+  }, []);
+
   return (
-    <figure className={cx(className, "relative")}>
+    <figure ref={imageRef} className={cx(className, "relative")}>
       <Image
-        className="object-cover"
+        className={cx("object-cover")}
         src={src}
         alt={alt}
-        loading="eager"
+        loading={isVisible ? "eager" : "lazy"}
         fill
       />
     </figure>
