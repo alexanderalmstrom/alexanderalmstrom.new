@@ -2,7 +2,7 @@ import { cva, cx, VariantProps } from "class-variance-authority";
 
 export type HeadingVariantProps = VariantProps<typeof heading>;
 
-const heading = cva([], {
+const heading = cva(["tracking-tight"], {
   variants: {
     size: {
       large: "text-fluid-1",

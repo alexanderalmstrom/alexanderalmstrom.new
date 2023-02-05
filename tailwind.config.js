@@ -18,9 +18,9 @@ module.exports = {
         mono: ["var(--font-suisse-mono)", ...fontFamily.mono],
       },
       fontSize: {
-        "fluid-1": ["clamp(4rem, 8vw + 2rem, 8rem)", "1.1"],
-        "fluid-2": ["clamp(3rem, 6vw + 1.5rem, 6rem)", "1.1"],
-        "fluid-3": ["clamp(2rem, 4vw + 1rem, 4rem)", "1.1"],
+        "fluid-1": ["clamp(4rem, 8vw + 2rem, 8rem)", "1"],
+        "fluid-2": ["clamp(3rem, 6vw + 1.5rem, 6rem)", "1"],
+        "fluid-3": ["clamp(2rem, 4vw + 1rem, 4rem)", "1"],
       },
     },
   },
