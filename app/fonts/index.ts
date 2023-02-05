@@ -33,7 +33,7 @@ export const suisseWorks = localFont({
       weight: "700",
     },
   ],
-  variable: "--font-suisse-serif",
+  variable: "--font-suisse-works",
 });
 
 export const suisseMono = localFont({
