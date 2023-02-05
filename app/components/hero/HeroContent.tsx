@@ -1,5 +1,7 @@
 import { cva, cx, type VariantProps } from "class-variance-authority";
 
+export type HeroContentVariantProps = VariantProps<typeof heroContent>;
+
 export const heroContent = cva([], {
   variants: {
     align: {
@@ -12,7 +14,7 @@ export const heroContent = cva([], {
   },
 });
 
-export interface HeroContentProps extends VariantProps<typeof heroContent> {
+export interface HeroContentProps extends HeroContentVariantProps {
   className?: string;
   children: React.ReactNode;
 }

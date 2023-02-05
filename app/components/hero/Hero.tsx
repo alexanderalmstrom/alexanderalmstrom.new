@@ -1,5 +1,7 @@
 import { cva, cx, type VariantProps } from "class-variance-authority";
 
+export type HeroVariantProps = VariantProps<typeof hero>;
+
 export const hero = cva(["grid relative overflow-hidden"], {
   variants: {
     variant: {
@@ -16,7 +18,7 @@ export const hero = cva(["grid relative overflow-hidden"], {
   },
 });
 
-export interface HeroProps extends VariantProps<typeof hero> {
+export interface HeroProps extends HeroVariantProps {
   className?: string;
   children: React.ReactNode;
 }
