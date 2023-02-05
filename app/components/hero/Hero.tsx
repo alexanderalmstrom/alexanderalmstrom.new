@@ -7,14 +7,18 @@ export const hero = cva(["grid relative overflow-hidden"], {
     variant: {
       full: "h-screen",
     },
+    background: {
+      black: "bg-black",
+      white: "bg-white",
+    },
     color: {
-      white: "text-white",
       black: "text-black",
+      white: "text-white",
     },
   },
   defaultVariants: {
     variant: "full",
-    color: "white",
+    color: "black",
   },
 });
 
@@ -27,10 +31,11 @@ export default function Hero({
   className,
   children,
   variant,
+  background,
   color,
 }: HeroProps) {
   return (
-    <section className={cx(className, hero({ variant, color }))}>
+    <section className={cx(className, hero({ variant, background, color }))}>
       {children}
     </section>
   );
