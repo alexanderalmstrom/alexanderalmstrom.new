@@ -28,7 +28,7 @@ export default function Heading({
   const Component = as;
 
   return (
-    <Component className={cx(heading({ size }), className)} {...props}>
+    <Component className={cx(className, heading({ size }))} {...props}>
       {children}
     </Component>
   );
