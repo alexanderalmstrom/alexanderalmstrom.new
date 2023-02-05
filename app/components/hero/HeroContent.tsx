@@ -1,6 +1,6 @@
 import { cva, cx, type VariantProps } from "class-variance-authority";
 
-export const heroContent = cva([], {
+export const heroContent = cva(["relative"], {
   variants: {
     align: {
       center: "place-self-center",

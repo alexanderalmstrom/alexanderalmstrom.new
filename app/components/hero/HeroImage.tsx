@@ -1,4 +1,3 @@
-import { cx } from "class-variance-authority";
 import Image from "next/image";
 
 export interface HeroImageProps {
@@ -9,12 +8,7 @@ export interface HeroImageProps {
 
 export default function HeroImage({ className, src, alt }: HeroImageProps) {
   return (
-    <figure
-      className={cx(
-        className,
-        "relative col-span-full row-span-full w-full h-full"
-      )}
-    >
+    <figure className={className}>
       <Image
         className="object-cover"
         src={src}
