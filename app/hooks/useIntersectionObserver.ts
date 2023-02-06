@@ -7,11 +7,11 @@ export function useIntersectionObserver(
 ) {
   const [element, setElement] = useState<Element | null>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
-  const observer = useRef<null | IntersectionObserver>(null);
+  const observerRef = useRef<null | IntersectionObserver>(null);
 
   const destroy = () => {
-    if (observer.current) {
-      observer.current.disconnect();
+    if (observerRef.current) {
+      observerRef.current.disconnect();
     }
   };
 
@@ -24,7 +24,7 @@ export function useIntersectionObserver(
 
     destroy();
 
-    const ob = (observer.current = new IntersectionObserver(
+    const observer = (observerRef.current = new IntersectionObserver(
       ([entry]) => {
         const isElementIntersecting = entry.isIntersecting;
 
@@ -38,7 +38,7 @@ export function useIntersectionObserver(
       { ...options }
     ));
 
-    ob.observe(element);
+    observer.observe(element);
 
     return () => {
       destroy();
