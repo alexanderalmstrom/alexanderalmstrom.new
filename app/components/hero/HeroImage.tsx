@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 export type HeroImageVariantProps = VariantProps<typeof heroImage>;
 
-export const heroImage = cva(["col-span-full row-span-full"], {
+export const heroImage = cva(["relative col-span-full row-span-full"], {
   variants: {},
 });
 
@@ -19,7 +19,7 @@ export interface HeroImageProps extends HeroImageVariantProps {
 
 export default function HeroImage({ className, src, alt }: HeroImageProps) {
   const ref = useRef<HTMLElement | null>(null);
-  const isIntersecting = useIntersectionObserver(ref, {
+  const { isIntersecting } = useIntersectionObserver(ref, {
     threshold: 0,
     rootMargin: "0px 0px",
   });

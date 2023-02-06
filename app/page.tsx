@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main>
       <Hero ratio="full">
-        {/* <HeroImage src="https://source.unsplash.com/random/2560x1080" alt="" /> */}
+        {/* <HeroImage src="https://source.unsplash.com/random/3000x3001" alt="" /> */}
         <HeroContent>
           <Heading as="h1" size="large">
             Senior Frontend Developer & Designer

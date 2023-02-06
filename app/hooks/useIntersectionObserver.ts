@@ -1,12 +1,26 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 
+interface IntersectionData {
+  isIntersecting: Boolean;
+  intersectionRatio: number;
+}
+
 export function useIntersectionObserver(
   ref: MutableRefObject<Element | null>,
   options: IntersectionObserverInit = {},
   forward: boolean = true
 ) {
   const [element, setElement] = useState<Element | null>(null);
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [
+    {
+      isIntersecting: elementIsIntersecting,
+      intersectionRatio: elementIntersectionRatio,
+    },
+    setIntersectionData,
+  ] = useState<IntersectionData>({
+    isIntersecting: false,
+    intersectionRatio: 0,
+  });
   const observerRef = useRef<null | IntersectionObserver>(null);
 
   const destroy = () => {
@@ -26,12 +40,15 @@ export function useIntersectionObserver(
 
     const observer = (observerRef.current = new IntersectionObserver(
       ([entry]) => {
-        const isElementIntersecting = entry.isIntersecting;
+        const { isIntersecting, intersectionRatio } = entry;
 
         if (!forward) {
-          setIsIntersecting(isElementIntersecting);
-        } else if (forward && !isIntersecting && isElementIntersecting) {
-          setIsIntersecting(isElementIntersecting);
+          setIntersectionData({
+            isIntersecting,
+            intersectionRatio,
+          });
+        } else if (forward && !elementIsIntersecting && isIntersecting) {
+          setIntersectionData({ isIntersecting, intersectionRatio });
           destroy();
         }
       },
@@ -45,5 +62,8 @@ export function useIntersectionObserver(
     };
   }, [element, options]);
 
-  return isIntersecting;
+  return {
+    isIntersecting: elementIsIntersecting,
+    intersectionRatio: elementIntersectionRatio,
+  };
 }
