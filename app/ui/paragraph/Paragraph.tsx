@@ -1,4 +1,4 @@
-import { suisseIntl, suisseMono } from "@/app/fonts";
+import { suisseIntl, suisseMono } from "@/app/assets/fonts";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 
 export const paragraph = cva(["max-w-3xl leading-relaxed"], {

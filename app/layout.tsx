@@ -1,6 +1,6 @@
 import "./css/global.css";
 import { cx } from "class-variance-authority";
-import { suisseIntl } from "./fonts";
+import { suisseIntl } from "@assets/fonts";
 
 export default function RootLayout({
   children,

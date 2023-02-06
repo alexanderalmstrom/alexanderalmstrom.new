@@ -1,6 +1,6 @@
-import { Heading } from "@components/heading";
+import { Heading } from "@/app/ui/heading";
 import { Hero, HeroContent, HeroImage } from "@components/hero";
-import { Paragraph } from "@components/paragraph";
+import { Paragraph } from "@ui/paragraph";
 
 export default function Home() {
   return (
