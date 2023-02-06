@@ -28,7 +28,7 @@ export default function HeroImage({ className, src, alt }: HeroImageProps) {
     <figure ref={ref} className={cx(className, heroImage())}>
       <Image
         className={cx(
-          "relative object-cover transition-opacity duration-300",
+          "object-cover transition-opacity duration-300",
           `${isIntersecting ? "opacity-1" : "opacity-0"}`
         )}
         src={src}
