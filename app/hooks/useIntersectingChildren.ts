@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 
-export function useVisibleElements(
+export function useIntersectingChildren(
   ref: MutableRefObject<Element | null>,
   children: ReactNode,
   options: IntersectionObserverInit = {}
@@ -19,7 +19,7 @@ export function useVisibleElements(
     new Set()
   );
 
-  const elements = Children.map(children, (child, index) => {
+  const childElements = Children.map(children, (child, index) => {
     if (!isValidElement(child)) return child;
 
     const elementRef = useRef<HTMLElement | null>(null);
@@ -71,7 +71,7 @@ export function useVisibleElements(
   });
 
   return {
-    elements,
     intersectingChildren,
+    childElements,
   };
 }
