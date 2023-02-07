@@ -33,35 +33,35 @@ export default function Slider({ className, children }: SliderProps) {
 
     const elementRef = useRef<HTMLElement | null>(null);
 
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const { isIntersecting, intersectionRatio } = entry;
+    function observeElements(entries: IntersectionObserverEntry[]) {
+      entries.forEach((entry) => {
+        const { isIntersecting, intersectionRatio } = entry;
 
-            if (isIntersecting && intersectionRatio > 0.5) {
-              setIntersectingChildren((prevIntersectingChildren) => {
-                const newIntersectingChildren = new Set(
-                  prevIntersectingChildren
-                );
-                newIntersectingChildren.add(index);
-                return newIntersectingChildren;
-              });
-            } else {
-              setIntersectingChildren((prevIntersectingChildren) => {
-                const newIntersectingChildren = new Set(
-                  prevIntersectingChildren
-                );
-                newIntersectingChildren.delete(index);
-                return newIntersectingChildren;
-              });
-            }
+        if (isIntersecting && intersectionRatio > 0.5) {
+          setIntersectingChildren((prevIntersectingChildren) => {
+            const newIntersectingChildren = new Set(prevIntersectingChildren);
+            newIntersectingChildren.add(index);
+            return newIntersectingChildren;
           });
-        },
-        {
-          root: ref.current,
-          threshold: [0, 0.5, 1],
+        } else {
+          setIntersectingChildren((prevIntersectingChildren) => {
+            const newIntersectingChildren = new Set(prevIntersectingChildren);
+            newIntersectingChildren.delete(index);
+            return newIntersectingChildren;
+          });
         }
+      });
+    }
+
+    useEffect(() => {
+      const observeOptions = {
+        root: ref.current,
+        threshold: [0, 0.5, 1],
+      };
+
+      const observer = new IntersectionObserver(
+        observeElements,
+        observeOptions
       );
 
       if (elementRef.current) {
@@ -73,15 +73,15 @@ export default function Slider({ className, children }: SliderProps) {
       };
     }, []);
 
-    useEffect(() => {
-      console.log("intersectingChildren updated", intersectingChildren);
-    }, [intersectingChildren]);
-
     return cloneElement(child as ReactElement, {
       ref: elementRef,
       key: index,
     });
   });
+
+  useEffect(() => {
+    console.log("intersectingChildren updated", intersectingChildren);
+  }, [intersectingChildren]);
 
   return (
     <section ref={ref} className={cx(className, slider())}>
