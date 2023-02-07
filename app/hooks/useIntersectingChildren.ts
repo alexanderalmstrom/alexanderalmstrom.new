@@ -24,23 +24,29 @@ export function useIntersectingChildren(
 
     const elementRef = useRef<HTMLElement | null>(null);
 
+    function updateIntersectingChildren(
+      prevIntersectingChildren: Set<number>,
+      shouldAdd: boolean
+    ): Set<number> {
+      const newIntersectingChildren = new Set(prevIntersectingChildren);
+
+      shouldAdd
+        ? newIntersectingChildren.add(index)
+        : newIntersectingChildren.delete(index);
+
+      return new Set(Array.from(newIntersectingChildren).sort((a, b) => a - b));
+    }
+
     function handleObserve(entries: IntersectionObserverEntry[]) {
       entries.forEach((entry) => {
         const { isIntersecting, intersectionRatio } = entry;
 
-        if (isIntersecting && intersectionRatio > 0.5) {
-          setIntersectingChildren((prevIntersectingChildren) => {
-            const newIntersectingChildren = new Set(prevIntersectingChildren);
-            newIntersectingChildren.add(index);
-            return newIntersectingChildren;
-          });
-        } else {
-          setIntersectingChildren((prevIntersectingChildren) => {
-            const newIntersectingChildren = new Set(prevIntersectingChildren);
-            newIntersectingChildren.delete(index);
-            return newIntersectingChildren;
-          });
-        }
+        setIntersectingChildren((prevIntersectingChildren) =>
+          updateIntersectingChildren(
+            prevIntersectingChildren,
+            isIntersecting && intersectionRatio > 0.5
+          )
+        );
       });
     }
 
