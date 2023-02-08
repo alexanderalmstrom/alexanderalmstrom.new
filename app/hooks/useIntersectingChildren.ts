@@ -19,10 +19,10 @@ export function useIntersectingChildren(
     new Set()
   );
 
-  const childElements = Children.map(children, (child, index) => {
+  const elements = Children.map(children, (child, index) => {
     if (!isValidElement(child)) return child;
 
-    const elementRef = useRef<HTMLElement | null>(null);
+    const element = useRef<HTMLElement | null>(null);
 
     function updateIntersectingChildren(
       prevIntersectingChildren: Set<number>,
@@ -61,8 +61,8 @@ export function useIntersectingChildren(
         ...options,
       });
 
-      if (elementRef.current) {
-        observer.observe(elementRef.current);
+      if (element.current) {
+        observer.observe(element.current);
       }
 
       return () => {
@@ -71,13 +71,13 @@ export function useIntersectingChildren(
     }, [ref, children]);
 
     return cloneElement(child as ReactElement, {
-      ref: elementRef,
+      ref: element,
       key: index,
     });
   });
 
   return {
     intersectingChildren,
-    childElements,
+    elements,
   };
 }

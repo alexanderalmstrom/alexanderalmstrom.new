@@ -18,7 +18,7 @@ export interface SliderProps {
 export default function Slider({ className, children }: SliderProps) {
   const ref = useRef<HTMLElement | null>(null);
 
-  const { intersectingChildren, childElements } = useIntersectingChildren(
+  const { intersectingChildren, elements } = useIntersectingChildren(
     ref,
     children,
     {
@@ -33,7 +33,7 @@ export default function Slider({ className, children }: SliderProps) {
   return (
     <section ref={ref} className={cx(className, slider())}>
       <div className="flex overflow-x-auto scroll-smooth snap-mandatory snap-x scrollbar-hide">
-        {childElements}
+        {elements}
       </div>
     </section>
   );
