@@ -1,8 +1,8 @@
 import { cva, cx, type VariantProps } from "class-variance-authority";
 
-export type HeroVariantProps = VariantProps<typeof hero>;
+export type HeroVariantProps = VariantProps<typeof root>;
 
-export const hero = cva(["grid overflow-hidden"], {
+export const root = cva(["grid overflow-hidden"], {
   variants: {
     ratio: {
       fluid: "aspect-9/16 sm:aspect-square md:aspect-4/3 lg:aspect-16/9",
@@ -39,7 +39,7 @@ export default function Hero({
   color,
 }: HeroProps) {
   return (
-    <section className={cx(className, hero({ ratio, background, color }))}>
+    <section className={cx(className, root({ ratio, background, color }))}>
       {children}
     </section>
   );

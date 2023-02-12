@@ -5,9 +5,9 @@ import { cva, cx, type VariantProps } from "class-variance-authority";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 
-export type ImageVariantProps = VariantProps<typeof image>;
+export type ImageVariantProps = VariantProps<typeof root>;
 
-export const image = cva(["relative"], {
+export const root = cva(["relative"], {
   variants: {},
 });
 
@@ -26,7 +26,7 @@ const Image = forwardRef(
     );
 
     return (
-      <figure ref={ref} className={cx(className, image())}>
+      <figure ref={ref} className={cx(className, root())}>
         <NextImage
           className={cx(
             "object-cover transition-opacity duration-300",

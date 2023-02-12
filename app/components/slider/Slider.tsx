@@ -4,13 +4,13 @@ import { useRef, useEffect } from "react";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 import { useIntersectingChildren } from "@hooks/useIntersectingChildren";
 
-const slider = cva([], {
+export const root = cva(["max-w-screen-xl mx-auto"], {
   variants: {},
 });
 
-export type SliderVariantProps = VariantProps<typeof slider>;
+export type SliderVariantProps = VariantProps<typeof root>;
 
-export interface SliderProps {
+export interface SliderProps extends SliderVariantProps {
   className?: string;
   children: React.ReactNode;
 }
