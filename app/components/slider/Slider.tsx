@@ -31,7 +31,7 @@ export default function Slider({ className, children }: SliderProps) {
   }, [intersectingChildren]);
 
   return (
-    <section ref={ref} className={cx(className, slider())}>
+    <section ref={ref} className={cx(className, root())}>
       <div className="flex overflow-x-auto scroll-smooth snap-mandatory snap-x scrollbar-hide">
         {elements}
       </div>
