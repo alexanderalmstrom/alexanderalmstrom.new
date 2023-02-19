@@ -1,8 +1,7 @@
 import { Heading } from "@/app/ui/heading";
-import { Hero, HeroContent, HeroImage } from "@components/hero";
+import { Hero, HeroContent } from "@components/hero";
 import { Slider } from "@components/slider";
 import { Image } from "@ui/image";
-import { Paragraph } from "@ui/paragraph";
 
 export default function Home() {
   return (
@@ -22,6 +21,7 @@ export default function Home() {
 
           return (
             <Image
+              key={index}
               className="flex-grow min-w-[calc(50vw-2vw)] aspect-5/7 snap-start"
               src={src}
               alt={alt}
