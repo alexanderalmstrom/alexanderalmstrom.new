@@ -29,7 +29,7 @@ const Image = forwardRef(
       <figure ref={ref} className={cx(className, root())}>
         <NextImage
           className={cx(
-            "object-cover transition-opacity duration-300",
+            "object-cover transition-opacity duration-300 delay-150",
             `${isIntersecting ? "opacity-1" : "opacity-0"}`
           )}
           {...props}
