@@ -30,6 +30,8 @@ export function useIntersectionObserver(
   };
 
   useEffect(() => {
+    if (!ref?.current) return;
+
     setElement(ref.current);
   }, [ref]);
 

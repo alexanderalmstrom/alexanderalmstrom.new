@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 import { useIntersectingChildren } from "@hooks/useIntersectingChildren";
 
-export const root = cva(["max-w-screen-xl mx-auto"], {
+export const root = cva([""], {
   variants: {},
 });
 
@@ -26,9 +26,7 @@ export default function Slider({ className, children }: SliderProps) {
     }
   );
 
-  useEffect(() => {
-    console.log("intersectingChildren updated", intersectingChildren);
-  }, [intersectingChildren]);
+  console.log("intersectingChildren", intersectingChildren);
 
   return (
     <section ref={ref} className={cx(className, root())}>

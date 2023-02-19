@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, MutableRefObject, Ref } from "react";
+import { forwardRef, MutableRefObject, Ref, useRef } from "react";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
@@ -16,7 +16,9 @@ export interface ImageProps extends NextImageProps {
 }
 
 const Image = forwardRef(
-  ({ className, ...props }: ImageProps, ref: Ref<HTMLElement>) => {
+  ({ className, ...props }: ImageProps, forwardedRef: Ref<HTMLElement>) => {
+    const ref = forwardedRef ?? useRef<HTMLElement | null>(null);
+
     const { isIntersecting } = useIntersectionObserver(
       ref as MutableRefObject<HTMLElement>,
       {

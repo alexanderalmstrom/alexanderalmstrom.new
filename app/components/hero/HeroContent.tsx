@@ -3,7 +3,7 @@ import { cva, cx, type VariantProps } from "class-variance-authority";
 export type HeroContentVariantProps = VariantProps<typeof heroContent>;
 
 export const heroContent = cva(
-  ["col-span-full row-span-full max-w-6xl p-4 lg:p-8 z-10"],
+  ["col-span-full row-span-full p-4 lg:p-8 z-10"],
   {
     variants: {
       align: {

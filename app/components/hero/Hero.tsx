@@ -13,16 +13,10 @@ export const root = cva(["grid overflow-hidden"], {
     },
     background: {
       black: "bg-black",
-      white: "bg-white",
     },
     color: {
-      black: "text-black",
       white: "text-white",
     },
-  },
-  defaultVariants: {
-    background: "black",
-    color: "white",
   },
 });
 
