@@ -1,35 +1,62 @@
-import { Heading } from "@/app/ui/heading";
+import { randomUnsplashImages } from "@mocks/unsplash";
 import { Hero, HeroContent } from "@components/hero";
+import { Box } from "@components/box";
 import { Slider } from "@components/slider";
+import { AspectRatio } from "@components/aspect-ratio";
+import { Heading } from "@ui/heading";
 import { Image } from "@ui/image";
+
+const images1 = randomUnsplashImages({ total: 25, width: 3000, height: 2000 });
+const images2 = randomUnsplashImages({
+  total: 25,
+  width: 1000,
+  height: 1500,
+});
 
 export default function Home() {
   return (
     <main>
-      <Hero ratio="full" background="black" color="white">
+      <Hero background="black" color="white">
         <HeroContent align="bottomLeft">
-          <Heading as="h1" size="large" className="max-w-[80vw]">
-            Senior Frontend Developer & Designer
-          </Heading>
+          <Slider>
+            {images1.map((image, index) => (
+              <AspectRatio
+                className="flex-grow min-w-[calc(100%)] snap-start"
+                ratio="full"
+              >
+                <Image
+                  key={index}
+                  src={image.src}
+                  alt={image.alt}
+                  sizes="100vw"
+                  fill
+                />
+              </AspectRatio>
+            ))}
+          </Slider>
+          <Box padding={12}>
+            <Heading size="large">
+              Senior Frontend Developer & UI Designer based in Stockholm,
+              Sweden.
+            </Heading>
+          </Box>
         </HeroContent>
       </Hero>
       <Slider>
-        {[...Array(50)].map((_, i) => {
-          const index = i + 1;
-          const src = `https://source.unsplash.com/random/2000x300${index}`;
-          const alt = `Random unsplash image ${index}`;
-
-          return (
+        {images2.map((image, index) => (
+          <AspectRatio
+            className="flex-grow min-w-[calc(50%-2vw)] lg:min-w-[calc(33%-3vw)] snap-start"
+            ratio="portrait"
+          >
             <Image
               key={index}
-              className="flex-grow min-w-[calc(50vw-2vw)] aspect-5/7 snap-start"
-              src={src}
-              alt={alt}
-              sizes="50vw"
+              src={image.src}
+              alt={image.alt}
+              sizes="33vw"
               fill
             />
-          );
-        })}
+          </AspectRatio>
+        ))}
       </Slider>
     </main>
   );
