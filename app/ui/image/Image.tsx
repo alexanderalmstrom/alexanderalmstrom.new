@@ -1,13 +1,13 @@
 "use client";
 
-import { forwardRef, MutableRefObject, Ref, useRef } from "react";
+import { forwardRef, MutableRefObject, Ref, useRef, useState } from "react";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 
 export type ImageVariantProps = VariantProps<typeof root>;
 
-export const root = cva(["relative"], {
+export const root = cva([""], {
   variants: {},
 });
 
@@ -18,6 +18,7 @@ export interface ImageProps extends NextImageProps {
 const Image = forwardRef(
   ({ className, ...props }: ImageProps, forwardedRef: Ref<HTMLElement>) => {
     const ref = forwardedRef ?? useRef<HTMLElement | null>(null);
+    const [loaded, setLoaded] = useState(false);
 
     const { isIntersecting } = useIntersectionObserver(
       ref as MutableRefObject<HTMLElement>,
@@ -32,8 +33,9 @@ const Image = forwardRef(
         <NextImage
           className={cx(
             "object-cover transition-opacity duration-300 delay-150",
-            `${isIntersecting ? "opacity-1" : "opacity-0"}`
+            `${isIntersecting && loaded ? "opacity-1" : "opacity-0"}`
           )}
+          onLoad={() => setLoaded(true)}
           {...props}
         />
       </figure>
